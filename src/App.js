@@ -36,7 +36,16 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>Hello World!</h1>
+        <h1>Music Library!</h1>
+        <table>
+          <thead>
+          <td><h3>Title</h3></td>
+          <td><h3>Artist</h3></td>
+          <td><h3>Album</h3></td>
+          <td><h3>Release Date</h3></td>
+          </thead>
+          {this.state.music.map(song => <tr key={song.id}><td>{song.title}</td> <td>{song.artist}</td>  <td>{song.album}</td> <td>{song.release_date}</td></tr>)}
+        </table>
       </div>
     );
   } 
