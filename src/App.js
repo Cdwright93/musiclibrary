@@ -22,12 +22,16 @@ class App extends Component {
       console.log(this.state.music)
   }
   createSong = async () => {
-    let res = await api.post('/', {"title": "BLEACH",
-    "artist": "BROCKHAMPTON",
-    "album": "SATURATION III",
-    "release_date": "2017-04-22"})
+    let res = await api.post('/', {"title": " ",
+    "artist": " ",
+    "album": " ",
+    "release_date": " "})
     console.log(res)
     this.getMusic();
+  }
+  deleteSong = async (id) => {
+    let data = await api.delete(`/${id}`)
+    this.getMusic()
   }
   render() {
     return (
