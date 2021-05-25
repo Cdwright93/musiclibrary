@@ -41,16 +41,29 @@ class App extends Component {
       console.log(data)
     this.getMusic()
   }
+  compareBy(key) {
+    return function (a, b) {
+      if (a[key] < b[key]) return -1;
+      if (a[key] > b[key]) return 1;
+      return 0;
+    };
+  }
+  sortBy(key) {
+    let arrayCopy = [...this.state.music];
+    arrayCopy.sort(this.compareBy(key));
+    this.setState({music : arrayCopy});
+  }
+
   render() {
     return (
       <div>
         <h1>Music Library!</h1>
         <table id ="musicTable">
           <thead>
-          <td><h3>Title</h3></td>
-          <td><h3>Artist</h3></td>
-          <td><h3>Album</h3></td>
-          <td><h3>Release Date</h3></td>
+          <td onClick={() => this.sortBy('title')}><h3>Title</h3></td>
+          <td onClick={() => this.sortBy('artist')}><h3>Artist</h3></td>
+          <td onClick={() => this.sortBy('album')}><h3>Album</h3></td>
+          <td onClick={() => this.sortBy('release_date')}><h3>Release Date</h3></td>
           </thead>
           {this.state.music.map(song => <tr key={song.id}><td>{song.title}</td> <td>{song.artist}</td><td>{song.album}</td> <td>{song.release_date}</td><button onClick={()=>this.deleteSong(song.id)}>Delete</button>
           <button onClick = {(event) => this.updateSong(song.id,event)}>Edit</button></tr>)}

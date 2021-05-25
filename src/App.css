@@ -50,9 +50,17 @@
 th,
 td {
   text-align: left;
-  padding: 6px;
+  padding: 8px;
 }
 
 tr:nth-child(even) {
   background-color: #f2f2f2;
+}
+header {
+  display: flex;
+}
+thead {
+  cursor: pointer;
+  margin-bottom: auto;
+  align-items: center;
 }
