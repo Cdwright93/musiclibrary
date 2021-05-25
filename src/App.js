@@ -29,18 +29,23 @@ class App extends Component {
     this.getMusic();
   }
   deleteSong = async (id) => {
-    let data = await api.delete(`/${id}`)
+    let data = await api.delete(`/${id}/`)
+    console.log(data)
     this.getMusic()
   }
-  updateSong = async (id, val) => {
-    let data = await api.put(`/${id}`, { title: val }, {artist : val}, {album : val}, {release_date : val})
+  updateSong = async (id, event) => {
+    let data = await api.put(`/${id}/`, {title: event.target.title.value,
+      artist: event.target.artist.value,
+      album: event.target.album.value,
+      release_date: event.target.release_date.value})
+      console.log(data)
     this.getMusic()
   }
   render() {
     return (
       <div>
         <h1>Music Library!</h1>
-        <table>
+        <table id ="musicTable">
           <thead>
           <td><h3>Title</h3></td>
           <td><h3>Artist</h3></td>
@@ -48,7 +53,7 @@ class App extends Component {
           <td><h3>Release Date</h3></td>
           </thead>
           {this.state.music.map(song => <tr key={song.id}><td>{song.title}</td> <td>{song.artist}</td><td>{song.album}</td> <td>{song.release_date}</td><button onClick={()=>this.deleteSong(song.id)}>Delete</button>
-          <button onClick = {() => this.updateSong(song.id, )}>Edit</button></tr>)}
+          <button onClick = {(event) => this.updateSong(song.id,event)}>Edit</button></tr>)}
         </table>
         <form onSubmit = {(event) => this.createSong(event)}>
           <h3>Add a song</h3>
